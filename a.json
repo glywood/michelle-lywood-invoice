@@ -1,0 +1,29 @@
+{
+  "source": {
+    "path": "./template0.pdf"
+  },
+  "pages": [
+    {
+      "modifiedFrom": 0,
+      "width": 612,
+      "height": 792,
+      "boxes": [
+        {
+          "bottom": 302,
+          "left": 0,
+          "width": 612,
+          "alignment": "center",
+          "text": {
+            "text": "June 22, 2017 | Palo Alto History Museum | Palo Alto, CA",
+            "options": {
+              "fontPath": "./PT_Serif-Web-Regular.ttf",
+              "size": 10,
+              "color": [0.859, 0.71, 0.608],
+              "charSpace": 0.3
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
