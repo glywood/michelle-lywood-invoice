@@ -3,6 +3,11 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "public"
+    "public": "public",
+    "rewrites": [{
+      "source": "/zohobooks", "function": "zohobooks"
+    }, {
+      "source": "/render", "function": "render"
+    }]
   }
 }
