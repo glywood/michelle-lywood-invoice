@@ -1,11 +1,13 @@
 const functions = require('firebase-functions');
-const request = require('request-promise-native');
+const rp = require('request-promise-native');
 const hummusrenderer = require('hummusrenderer');
 
 exports.zohobooks = functions.https.onRequest((request, response) => {
   const token = request.header('Zoho-authtoken');
+  const path = request.originalUrl.replace(/^\/zohobooks/, "");
   const options = {
-    url: 'https://books.zoho.com/api/v3' + request.url,
+    method: request.method,
+    url: 'https://books.zoho.com/api/v3' + path,
     headers: {
       'Authorization': 'Zoho-authtoken ' + token
     },
@@ -13,37 +15,13 @@ exports.zohobooks = functions.https.onRequest((request, response) => {
     resolveWithFullResponse: true
   };
 
-  return request(options).then(res => {
+  return rp(options).then(res => {
     response.status(res.statusCode).send(res.body);
   });
 });
 
 exports.render = functions.https.onRequest((request, response) => {
-  var inData = {
-	"pages": [
-		{
-			"width": 595,
-			"height": 842,
-			"boxes": [
-				{
-					"bottom":10,
-					"left":10,
-					"shape" : {
-						"method":"rectangle",
-						"width":400,
-						"height":300,
-						"options": {
-							"type":"fill",
-							"color":"red"
-						}
-
-					}
-				}
-			]
-		}
-	]
-}
-
+  var inData = request.body
   response.status(200);
   response.set('Content-Type', 'application/pdf');
   var outStream = new hummusrenderer.PDFStreamForResponse(response);

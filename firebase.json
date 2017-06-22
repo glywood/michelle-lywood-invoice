@@ -5,7 +5,7 @@
   "hosting": {
     "public": "public",
     "rewrites": [{
-      "source": "/zohobooks", "function": "zohobooks"
+      "source": "/zohobooks/**", "function": "zohobooks"
     }, {
       "source": "/render", "function": "render"
     }]
