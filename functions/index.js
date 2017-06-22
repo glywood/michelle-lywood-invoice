@@ -27,9 +27,10 @@ exports.render = functions.https.onRequest((request, response) => {
   var outStream = new hummusrenderer.PDFStreamForResponse(response);
 
   return new Promise((resolve, reject) => {
-    hummusrenderer.render(inData, outStream, {}, function() {
+    hummusrenderer.render(inData, outStream, {}, function(err) {
       response.end();
-      resolve();
+      if (err) reject(err);
+      else resolve();
     });
   });
 });
